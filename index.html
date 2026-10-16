@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101a16" />
+  <meta name="description" content="Shop stylish men's and women's sandals at Vision Sandals. Browse the collection and order directly on WhatsApp." />
+  <title>Vision Sandals — Walk Your Way</title>
+
+  <!-- Tailwind CSS CDN keeps this project simple to deploy on GitHub Pages. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#101a16',
+            forest: '#183c2c',
+            lime: '#d8f36a',
+            sand: '#f6f4ed',
+            muted: '#7b817b'
+          },
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['Georgia', 'serif']
+          },
+          boxShadow: {
+            soft: '0 18px 55px rgba(16, 26, 22, 0.09)'
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://images.unsplash.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: #f6f4ed; }
+    .product-image { transition: transform .55s cubic-bezier(.2,.7,.2,1); }
+    .product-card:hover .product-image { transform: scale(1.055); }
+    .filter-btn[aria-pressed="true"] { background: #183c2c; color: #fff; border-color: #183c2c; }
+    .cart-overlay { opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility .25s ease; }
+    .cart-overlay.open { opacity: 1; visibility: visible; }
+    .cart-panel { transform: translateX(100%); transition: transform .3s ease; }
+    .cart-overlay.open .cart-panel { transform: translateX(0); }
+    .no-scroll { overflow: hidden; }
+    .toast { transform: translate(-50%, 18px); opacity: 0; pointer-events: none; transition: .25s ease; }
+    .toast.show { transform: translate(-50%, 0); opacity: 1; }
+    select:focus, input:focus { outline: 2px solid #d8f36a; outline-offset: 2px; }
+  </style>
+</head>
+<body class="font-sans text-ink antialiased">
+  <!-- Announcement strip -->
+  <div class="bg-ink px-4 py-2.5 text-center text-[10px] font-semibold uppercase tracking-[.2em] text-white sm:text-xs">
+    Easy ordering · Personal service · Made for every step
+  </div>
+
+  <!-- Header / navigation -->
+  <header class="sticky top-0 z-30 border-b border-black/5 bg-sand/95 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+      <a href="#" class="flex items-center gap-2.5" aria-label="Vision Sandals home">
+        <span class="grid h-10 w-10 place-items-center rounded-full bg-lime text-sm font-extrabold tracking-tight">VS</span>
+        <span>
+          <span class="block text-sm font-extrabold tracking-[.12em] sm:text-base">VISION <span class="font-medium">SANDALS</span></span>
+          <span class="mt-0.5 block text-[9px] font-semibold uppercase tracking-[.23em] text-muted">Walk your way</span>
+        </span>
+      </a>
+
+      <nav class="hidden items-center gap-7 text-sm font-semibold text-ink/70 md:flex" aria-label="Main navigation">
+        <a class="transition hover:text-forest" href="#shop">Shop all</a>
+        <a class="transition hover:text-forest" href="#shop" data-nav-filter="men">Men</a>
+        <a class="transition hover:text-forest" href="#shop" data-nav-filter="women">Women</a>
+        <a class="transition hover:text-forest" href="#about">Our promise</a>
+      </nav>
+
+      <button id="open-cart" class="relative inline-flex items-center gap-2 rounded-full border border-ink/15 bg-white px-4 py-2.5 text-xs font-bold transition hover:bg-lime sm:px-5" aria-label="Open shopping cart">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3h2l2.3 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+        <span>Bag</span>
+        <span id="cart-count" class="grid h-5 min-w-5 place-items-center rounded-full bg-forest px-1 text-[10px] text-white">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Premium full-bleed hero with standout footwear photography -->
+    <section class="relative isolate min-h-[650px] overflow-hidden bg-[#10231a] sm:min-h-[720px] lg:min-h-[760px]">
+      <img
+        class="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+        src="hero-sandals.jpg"
+        alt="Close-up product photograph of black leather sandals with brown soles on a natural rock surface"
+        fetchpriority="high"
+      />
+      <div class="absolute inset-0 -z-10 bg-gradient-to-r from-[#08150f]/95 via-[#10231a]/75 to-[#10231a]/20"></div>
+      <div class="absolute inset-0 -z-10 bg-gradient-to-t from-[#08150f]/75 via-transparent to-black/10"></div>
+      <div class="mx-auto flex min-h-[650px] max-w-7xl items-center px-5 py-16 sm:min-h-[720px] sm:px-8 lg:min-h-[760px] lg:px-10">
+        <div class="max-w-3xl text-white">
+          <p class="mb-6 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-[10px] font-bold uppercase tracking-[.24em] text-lime backdrop-blur-md sm:text-xs">
+            <span class="h-2 w-2 rounded-full bg-lime shadow-[0_0_14px_rgba(216,243,106,.9)]"></span>
+            Vision Sandals · The everyday collection
+          </p>
+          <h1 class="max-w-3xl font-display text-5xl leading-[.98] tracking-[-.055em] sm:text-7xl lg:text-[6.8rem]">
+            Step out.<br />Stand <em class="font-normal text-lime">apart.</em>
+          </h1>
+          <p class="mt-7 max-w-xl text-sm leading-7 text-white/80 sm:text-lg sm:leading-8">
+            Sandals that bring comfort and confidence to every step. Discover standout styles for men and women, made for everyday plans and special moments.
+          </p>
+          <div class="mt-9 flex flex-wrap items-center gap-4">
+            <a href="#shop" class="inline-flex items-center gap-3 rounded-full bg-lime px-7 py-4 text-sm font-extrabold text-ink shadow-xl transition hover:-translate-y-0.5 hover:bg-white">
+              Shop the collection <span aria-hidden="true">↘</span>
+            </a>
+            <a href="#about" class="inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/10 px-6 py-4 text-sm font-bold text-white backdrop-blur-md transition hover:bg-white/20">
+              Why Vision <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <div class="mt-12 grid max-w-lg grid-cols-3 gap-4 border-t border-white/25 pt-6 sm:mt-16 sm:gap-8">
+            <div><p class="text-lg font-extrabold sm:text-2xl">Everyday</p><p class="mt-1 text-[9px] uppercase tracking-[.16em] text-white/65 sm:text-[10px]">Comfort first</p></div>
+            <div><p class="text-lg font-extrabold sm:text-2xl">Men + Women</p><p class="mt-1 text-[9px] uppercase tracking-[.16em] text-white/65 sm:text-[10px]">Styles for all</p></div>
+            <div><p class="text-lg font-extrabold sm:text-2xl">WhatsApp</p><p class="mt-1 text-[9px] uppercase tracking-[.16em] text-white/65 sm:text-[10px]">Easy ordering</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="absolute bottom-6 right-5 hidden rounded-2xl border border-white/20 bg-black/25 px-5 py-4 text-white backdrop-blur-md sm:block lg:right-10">
+        <p class="text-[9px] font-bold uppercase tracking-[.22em] text-lime">Your next favourite</p>
+        <p class="mt-1 font-display text-xl">Starts with one step.</p>
+      </div>
+    </section>
+
+    <!-- Shop section -->
+    <section id="shop" class="scroll-mt-24 bg-[#fbfaf6] py-12 sm:py-16 lg:py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <p class="text-[10px] font-bold uppercase tracking-[.24em] text-forest sm:text-xs">Find your fit</p>
+            <h2 class="mt-3 font-display text-4xl tracking-[-.04em] sm:text-5xl">The sandal shop<span class="text-forest">.</span></h2>
+            <p class="mt-3 max-w-lg text-sm leading-6 text-muted">Browse the collection, choose your size and add your favourites to the bag.</p>
+          </div>
+          <label class="relative block w-full md:max-w-xs">
+            <span class="sr-only">Search sandals</span>
+            <svg class="absolute left-4 top-1/2 -translate-y-1/2 text-muted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg>
+            <input id="search-input" type="search" placeholder="Search sandals..." class="w-full rounded-full border border-ink/10 bg-sand py-3.5 pl-11 pr-4 text-sm placeholder:text-muted/80" />
+          </label>
+        </div>
+
+        <div class="mt-8 flex flex-wrap items-center justify-between gap-4 border-b border-ink/10 pb-5">
+          <div class="flex flex-wrap gap-2" role="group" aria-label="Filter products by category">
+            <button class="filter-btn rounded-full border border-ink/15 px-4 py-2.5 text-xs font-bold transition hover:border-forest" data-filter="all" aria-pressed="true">All sandals</button>
+            <button class="filter-btn rounded-full border border-ink/15 px-4 py-2.5 text-xs font-bold transition hover:border-forest" data-filter="men" aria-pressed="false">Men's sandals</button>
+            <button class="filter-btn rounded-full border border-ink/15 px-4 py-2.5 text-xs font-bold transition hover:border-forest" data-filter="women" aria-pressed="false">Women's sandals</button>
+          </div>
+          <p id="results-count" class="text-xs font-medium text-muted" aria-live="polite">Showing collection</p>
+        </div>
+
+        <div id="product-grid" class="mt-7 grid grid-cols-1 gap-x-5 gap-y-9 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <!-- Product cards are rendered by JavaScript below. -->
+        </div>
+        <div id="empty-state" class="hidden rounded-3xl bg-sand px-6 py-16 text-center">
+          <p class="font-display text-2xl">No sandals found.</p>
+          <p class="mt-2 text-sm text-muted">Try another search or switch the category filter.</p>
+          <button id="reset-search" class="mt-5 rounded-full bg-forest px-5 py-3 text-xs font-bold text-white">Show all sandals</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brand promise -->
+    <section id="about" class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+      <div class="overflow-hidden rounded-[1.8rem] bg-forest text-white">
+        <div class="grid gap-8 px-6 py-10 sm:px-10 sm:py-12 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:px-14 lg:py-14">
+          <div><p class="text-[10px] font-bold uppercase tracking-[.24em] text-lime">The Vision promise</p><h2 class="mt-4 max-w-md font-display text-4xl leading-tight tracking-[-.04em] sm:text-5xl">Made for the way you move.</h2></div>
+          <div class="grid gap-6 sm:grid-cols-3">
+            <div class="border-t border-white/20 pt-4"><span class="text-2xl">01</span><h3 class="mt-4 text-sm font-bold">Your everyday style</h3><p class="mt-2 text-xs leading-6 text-white/65">Versatile looks that work with your wardrobe.</p></div>
+            <div class="border-t border-white/20 pt-4"><span class="text-2xl">02</span><h3 class="mt-4 text-sm font-bold">A personal touch</h3><p class="mt-2 text-xs leading-6 text-white/65">Order directly and confirm the details with us.</p></div>
+            <div class="border-t border-white/20 pt-4"><span class="text-2xl">03</span><h3 class="mt-4 text-sm font-bold">Simple checkout</h3><p class="mt-2 text-xs leading-6 text-white/65">Send your bag through WhatsApp in a few taps.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-ink/10 bg-sand">
+    <div class="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-7 text-xs text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+      <a href="#" class="font-extrabold tracking-[.15em] text-ink">VISION SANDALS<span class="text-forest">.</span></a>
+      <p>Find your stride. Make it yours.</p>
+      <p class="text-[10px] leading-5 sm:max-w-xs sm:text-right">Website &amp; product catalog designed and built by <strong class="text-ink">Bright Vision Digital Design</strong>.</p>
+      <div class="flex flex-wrap gap-4"><a class="hover:text-forest" href="tel:+233599035746">Call us</a><a class="hover:text-forest" href="mailto:mrshaibu776@gmail.com">Email us</a><a class="hover:text-forest" href="https://wa.me/233599035746" target="_blank" rel="noopener">WhatsApp</a></div>
+    </div>
+  </footer>
+
+  <!-- Cart drawer -->
+  <div id="cart-overlay" class="cart-overlay fixed inset-0 z-50 bg-ink/55" aria-hidden="true">
+    <button id="close-cart-backdrop" class="absolute inset-0 h-full w-full cursor-default" aria-label="Close cart"></button>
+    <aside id="cart-panel" class="cart-panel absolute right-0 top-0 flex h-full w-full max-w-md flex-col bg-sand shadow-2xl" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <div class="flex items-center justify-between border-b border-ink/10 px-5 py-5 sm:px-7">
+        <div><p class="text-[10px] font-bold uppercase tracking-[.2em] text-forest">Your selection</p><h2 id="cart-title" class="mt-1 font-display text-3xl">Your bag <span id="cart-title-count" class="text-muted">(0)</span></h2></div>
+        <button id="close-cart" class="grid h-10 w-10 place-items-center rounded-full border border-ink/15 text-xl transition hover:bg-lime" aria-label="Close shopping cart">×</button>
+      </div>
+      <div id="cart-items" class="flex-1 overflow-y-auto px-5 py-5 sm:px-7"></div>
+      <div class="border-t border-ink/10 bg-white px-5 py-5 sm:px-7">
+        <div class="flex items-center justify-between text-sm"><span class="text-muted">Subtotal</span><strong id="cart-subtotal" class="text-lg">GH₵0.00</strong></div>
+        <p class="mt-1 text-[10px] leading-5 text-muted">Delivery fees and final availability can be confirmed when you place your order.</p>
+        <label for="customer-note" class="mt-4 block text-xs font-bold">Order note <span class="font-normal text-muted">(optional)</span></label>
+        <textarea id="customer-note" rows="2" placeholder="Delivery area or any special request..." class="mt-2 w-full resize-none rounded-xl border border-ink/10 bg-sand px-3 py-3 text-sm placeholder:text-muted/70"></textarea>
+        <div class="mt-4 grid grid-cols-2 gap-2">
+          <a id="whatsapp-checkout" href="#" class="col-span-2 inline-flex items-center justify-center gap-2 rounded-full bg-forest px-4 py-3.5 text-sm font-bold text-white transition hover:bg-ink">Order on WhatsApp <span aria-hidden="true">↗</span></a>
+          <a href="tel:+233599035746" class="inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 px-3 py-3 text-xs font-bold transition hover:bg-lime">Call us</a>
+          <a id="email-checkout" href="mailto:mrshaibu776@gmail.com" class="inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 px-3 py-3 text-xs font-bold transition hover:bg-lime">Email inquiry</a>
+        </div>
+        <p class="mt-3 text-center text-[10px] text-muted">No online payment is collected on this demo storefront.</p>
+      </div>
+    </aside>
+  </div>
+
+  <div id="toast" class="toast fixed bottom-6 left-1/2 z-[60] rounded-full bg-ink px-5 py-3 text-xs font-semibold text-white shadow-xl" role="status" aria-live="polite">Added to your bag</div>
+
+  <script>
+    // Product data. Prices are sample catalog prices; edit them to match your real stock.
+    const products = [
+      { id: 1, name: 'The Everyday Slide', category: 'men', categoryLabel: "Men's sandals", price: 120, sizes: ['40','41','42','43','44','45'], color: 'Earth brown', badge: 'Bestseller', image: 'https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=900&q=85', alt: 'Brown casual sandals photographed in a natural setting' },
+      { id: 2, name: 'City Strap Sandal', category: 'men', categoryLabel: "Men's sandals", price: 145, sizes: ['40','41','42','43','44','45'], color: 'Classic black', badge: '', image: 'https://images.unsplash.com/photo-1622891856265-7f5b0f8e7e31?auto=format&fit=crop&w=900&q=85', alt: 'Men’s casual strap sandals' },
+      { id: 3, name: 'Sole Mate Flat', category: 'women', categoryLabel: "Women's sandals", price: 110, sizes: ['36','37','38','39','40','41'], color: 'Warm neutral', badge: 'Everyday pick', image: 'https://images.unsplash.com/photo-1614252369475-531eba835eb1?auto=format&fit=crop&w=900&q=85', alt: 'Women’s fashionable flat sandals' },
+      { id: 4, name: 'Weekend Comfort', category: 'women', categoryLabel: "Women's sandals", price: 135, sizes: ['36','37','38','39','40','41'], color: 'Soft tan', badge: '', image: 'https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?auto=format&fit=crop&w=900&q=85', alt: 'Women’s summer footwear in a lifestyle setting' },
+      { id: 5, name: 'Trail Easy Sandal', category: 'men', categoryLabel: "Men's sandals", price: 155, sizes: ['40','41','42','43','44','45'], color: 'Deep olive', badge: 'New arrival', image: 'https://images.unsplash.com/photo-1531310197839-ccf54634509e?auto=format&fit=crop&w=900&q=85', alt: 'Casual outdoor sandals' },
+      { id: 6, name: 'Golden Hour Slides', category: 'women', categoryLabel: "Women's sandals", price: 125, sizes: ['36','37','38','39','40','41'], color: 'Golden beige', badge: '', image: 'https://images.unsplash.com/photo-1604001307862-2d953b875079?auto=format&fit=crop&w=900&q=85', alt: 'Women’s sandals with a minimal summer look' },
+      { id: 7, name: 'Modern Buckle', category: 'men', categoryLabel: "Men's sandals", price: 160, sizes: ['40','41','42','43','44','45'], color: 'Dark brown', badge: '', image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=900&q=85', alt: 'Minimal leather-look sandals' },
+      { id: 8, name: 'Soft Step Sandal', category: 'women', categoryLabel: "Women's sandals", price: 118, sizes: ['36','37','38','39','40','41'], color: 'Cream', badge: 'Easy favourite', image: 'https://images.unsplash.com/photo-1582897085656-c636d006a246?auto=format&fit=crop&w=900&q=85', alt: 'Elegant women’s sandals' }
+    ];
+
+    const WHATSAPP_NUMBER = '233599035746';
+    const CONTACT_PHONE = '+233599035746';
+    const CONTACT_EMAIL = 'mrshaibu776@gmail.com';
+    let activeFilter = 'all';
+    let cart = [];
+    let toastTimer;
+
+    const grid = document.getElementById('product-grid');
+    const searchInput = document.getElementById('search-input');
+    const emptyState = document.getElementById('empty-state');
+    const resultsCount = document.getElementById('results-count');
+    const cartOverlay = document.getElementById('cart-overlay');
+
+    // Escape product text before placing it into HTML templates.
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[char]));
+    }
+
+    function money(amount) {
+      return new Intl.NumberFormat('en-GH', { style: 'currency', currency: 'GHS', minimumFractionDigits: 2 }).format(amount);
+    }
+
+    function renderProducts() {
+      const term = searchInput.value.trim().toLowerCase();
+      const filtered = products.filter(product => {
+        const categoryMatch = activeFilter === 'all' || product.category === activeFilter;
+        const searchMatch = `${product.name} ${product.categoryLabel} ${product.color}`.toLowerCase().includes(term);
+        return categoryMatch && searchMatch;
+      });
+
+      resultsCount.textContent = `Showing ${filtered.length} ${filtered.length === 1 ? 'style' : 'styles'}`;
+      emptyState.classList.toggle('hidden', filtered.length !== 0);
+      grid.classList.toggle('hidden', filtered.length === 0);
+      grid.innerHTML = filtered.map(product => `
+        <article class="product-card group min-w-0">
+          <div class="relative overflow-hidden rounded-2xl bg-sand">
+            <div class="aspect-[4/4.6] overflow-hidden">
+              <img class="product-image h-full w-full object-cover" src="${escapeHTML(product.image)}" alt="${escapeHTML(product.alt)}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1514989940723-e8e51635b782?auto=format&fit=crop&w=900&q=80';" />
+            </div>
+            ${product.badge ? `<span class="absolute left-3 top-3 rounded-full bg-white/95 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[.13em]">${escapeHTML(product.badge)}</span>` : ''}
+            <span class="absolute bottom-3 right-3 rounded-full bg-ink/85 px-3 py-1.5 text-[9px] font-semibold text-white">${escapeHTML(product.color)}</span>
+          </div>
+          <div class="pt-4">
+            <div class="flex items-start justify-between gap-3">
+              <div><p class="text-[9px] font-bold uppercase tracking-[.16em] text-forest">${escapeHTML(product.categoryLabel)}</p><h3 class="mt-1.5 text-base font-bold tracking-tight">${escapeHTML(product.name)}</h3></div>
+              <p class="whitespace-nowrap text-sm font-extrabold">${money(product.price)}</p>
+            </div>
+            <div class="mt-4 grid grid-cols-[1fr_auto] gap-2">
+              <label class="min-w-0"><span class="sr-only">Choose size for ${escapeHTML(product.name)}</span>
+                <select id="size-${product.id}" class="w-full rounded-xl border border-ink/10 bg-white px-3 py-3 text-xs font-semibold" aria-label="Choose size for ${escapeHTML(product.name)}">
+                  <option value="">Choose size</option>
+                  ${product.sizes.map(size => `<option value="${size}">${size}</option>`).join('')}
+                </select>
+              </label>
+              <button class="add-to-cart rounded-xl bg-lime px-4 py-3 text-xs font-extrabold transition hover:bg-forest hover:text-white" data-product-id="${product.id}">Add +</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function addToCart(productId) {
+      const product = products.find(item => item.id === productId);
+      const sizeSelect = document.getElementById(`size-${productId}`);
+      const size = sizeSelect ? sizeSelect.value : '';
+      if (!size) {
+        sizeSelect?.focus();
+        showToast('Choose a size first');
+        return;
+      }
+      const existing = cart.find(item => item.productId === productId && item.size === size);
+      if (existing) existing.quantity += 1;
+      else cart.push({ productId, size, quantity: 1 });
+      renderCart();
+      showToast(`${product.name} added to your bag`);
+    }
+
+    function changeQuantity(productId, size, delta) {
+      const item = cart.find(entry => entry.productId === productId && entry.size === size);
+      if (!item) return;
+      item.quantity += delta;
+      if (item.quantity <= 0) cart = cart.filter(entry => !(entry.productId === productId && entry.size === size));
+      renderCart();
+    }
+
+    function removeItem(productId, size) {
+      cart = cart.filter(item => !(item.productId === productId && item.size === size));
+      renderCart();
+    }
+
+    function cartSubtotal() {
+      return cart.reduce((sum, item) => {
+        const product = products.find(entry => entry.id === item.productId);
+        return sum + product.price * item.quantity;
+      }, 0);
+    }
+
+    function orderMessage() {
+      if (!cart.length) return '';
+      const lines = cart.map(item => {
+        const product = products.find(entry => entry.id === item.productId);
+        return `• ${product.name} — Size ${item.size} × ${item.quantity} — ${money(product.price * item.quantity)}`;
+      });
+      const note = document.getElementById('customer-note').value.trim();
+      return `Hello Vision Sandals! I'd like to place an order:\n\n${lines.join('\n')}\n\nSubtotal: ${money(cartSubtotal())}${note ? `\nOrder note: ${note}` : ''}\n\nPlease confirm availability and delivery details. Thank you!`;
+    }
+
+    function renderCart() {
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.getElementById('cart-count').textContent = count;
+      document.getElementById('cart-title-count').textContent = `(${count})`;
+      document.getElementById('cart-subtotal').textContent = money(cartSubtotal());
+
+      const cartItems = document.getElementById('cart-items');
+      if (!cart.length) {
+        cartItems.innerHTML = `<div class="flex h-full min-h-64 flex-col items-center justify-center text-center"><div class="grid h-16 w-16 place-items-center rounded-full bg-white text-2xl">⌑</div><h3 class="mt-5 font-display text-2xl">Your bag is waiting.</h3><p class="mt-2 max-w-xs text-sm leading-6 text-muted">When you find a pair you love, add it here and your order will be ready to send.</p><button id="continue-shopping" class="mt-6 rounded-full bg-forest px-5 py-3 text-xs font-bold text-white">Continue shopping</button></div>`;
+      } else {
+        cartItems.innerHTML = cart.map(item => {
+          const product = products.find(entry => entry.id === item.productId);
+          return `<article class="flex gap-4 border-b border-ink/10 py-4 first:pt-0">
+            <img src="${escapeHTML(product.image)}" alt="${escapeHTML(product.alt)}" class="h-24 w-20 rounded-xl object-cover" />
+            <div class="min-w-0 flex-1">
+              <div class="flex items-start justify-between gap-2"><div><p class="text-[9px] font-bold uppercase tracking-[.14em] text-forest">${escapeHTML(product.categoryLabel)}</p><h3 class="mt-1 text-sm font-bold">${escapeHTML(product.name)}</h3><p class="mt-1 text-xs text-muted">Size ${escapeHTML(item.size)}</p></div><button class="remove-item text-lg leading-none text-muted hover:text-red-600" data-product-id="${product.id}" data-size="${escapeHTML(item.size)}" aria-label="Remove ${escapeHTML(product.name)}">×</button></div>
+              <div class="mt-3 flex items-center justify-between gap-3"><div class="flex items-center gap-3 rounded-full border border-ink/10 bg-white px-2 py-1"><button class="quantity-btn h-6 w-6 rounded-full text-sm font-bold hover:bg-lime" data-delta="-1" data-product-id="${product.id}" data-size="${escapeHTML(item.size)}" aria-label="Decrease quantity">−</button><span class="min-w-3 text-center text-xs font-bold">${item.quantity}</span><button class="quantity-btn h-6 w-6 rounded-full text-sm font-bold hover:bg-lime" data-delta="1" data-product-id="${product.id}" data-size="${escapeHTML(item.size)}" aria-label="Increase quantity">+</button></div><strong class="text-sm">${money(product.price * item.quantity)}</strong></div>
+            </div>
+          </article>`;
+        }).join('');
+      }
+
+      const hasItems = cart.length > 0;
+      const whatsappLink = document.getElementById('whatsapp-checkout');
+      whatsappLink.href = hasItems ? `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(orderMessage())}` : '#';
+      whatsappLink.setAttribute('aria-disabled', String(!hasItems));
+      whatsappLink.classList.toggle('opacity-50', !hasItems);
+      whatsappLink.classList.toggle('pointer-events-none', !hasItems);
+
+      const emailLink = document.getElementById('email-checkout');
+      const subject = encodeURIComponent('Vision Sandals order inquiry');
+      const body = encodeURIComponent(orderMessage() || 'Hello Vision Sandals, I would like to ask about your sandals collection.');
+      emailLink.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    }
+
+    function openCart() {
+      cartOverlay.classList.add('open');
+      cartOverlay.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('no-scroll');
+      document.getElementById('close-cart').focus();
+    }
+
+    function closeCart() {
+      cartOverlay.classList.remove('open');
+      cartOverlay.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('no-scroll');
+      document.getElementById('open-cart').focus();
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    // Event delegation keeps product and cart controls working after re-rendering.
+    grid.addEventListener('click', event => {
+      const button = event.target.closest('.add-to-cart');
+      if (button) addToCart(Number(button.dataset.productId));
+    });
+
+    document.querySelectorAll('.filter-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        activeFilter = button.dataset.filter;
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.setAttribute('aria-pressed', String(btn === button)));
+        renderProducts();
+      });
+    });
+
+    document.querySelectorAll('[data-nav-filter]').forEach(link => {
+      link.addEventListener('click', () => {
+        activeFilter = link.dataset.navFilter;
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.setAttribute('aria-pressed', String(btn.dataset.filter === activeFilter)));
+        renderProducts();
+      });
+    });
+
+    searchInput.addEventListener('input', renderProducts);
+    document.getElementById('reset-search').addEventListener('click', () => {
+      searchInput.value = '';
+      activeFilter = 'all';
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.setAttribute('aria-pressed', String(btn.dataset.filter === 'all')));
+      renderProducts();
+    });
+
+    document.getElementById('open-cart').addEventListener('click', openCart);
+    document.getElementById('close-cart').addEventListener('click', closeCart);
+    document.getElementById('close-cart-backdrop').addEventListener('click', closeCart);
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && cartOverlay.classList.contains('open')) closeCart(); });
+
+    document.getElementById('cart-items').addEventListener('click', event => {
+      const quantityButton = event.target.closest('.quantity-btn');
+      const removeButton = event.target.closest('.remove-item');
+      const continueButton = event.target.closest('#continue-shopping');
+      if (quantityButton) changeQuantity(Number(quantityButton.dataset.productId), quantityButton.dataset.size, Number(quantityButton.dataset.delta));
+      if (removeButton) removeItem(Number(removeButton.dataset.productId), removeButton.dataset.size);
+      if (continueButton) closeCart();
+    });
+
+    document.getElementById('customer-note').addEventListener('input', renderCart);
+    document.getElementById('whatsapp-checkout').addEventListener('click', event => {
+      if (!cart.length) {
+        event.preventDefault();
+        showToast('Add a sandal to your bag first');
+      }
+    });
+
+    // Initial page state.
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>
